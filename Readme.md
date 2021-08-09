@@ -8,7 +8,7 @@ For Example see this [repo](https://github.com/salmanzafar949/Laravel-Mqtt-Examp
 
 ## Installation
 ```
-composer require Elemenx/laravel-mqtt
+composer require elemenx/laravel-mqtt
 ```
 ## Features
 
