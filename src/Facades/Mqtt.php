@@ -6,7 +6,7 @@
  * Time: 12:03 PM
  */
 
-namespace Salman\Mqtt\Facades;
+namespace ElemenX\Mqtt\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
@@ -16,5 +16,4 @@ class Mqtt extends Facade
     {
         return 'Mqtt';
     }
-
 }

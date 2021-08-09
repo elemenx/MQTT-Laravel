@@ -6,26 +6,24 @@
  * Time: 1:34 PM
  */
 
-namespace Salman\Mqtt;
+namespace ElemenX\Mqtt;
 
 use Illuminate\Support\ServiceProvider;
-use Salman\Mqtt\MqttClass\Mqtt;
+use ElemenX\Mqtt\MqttClass\Mqtt;
 
 class MqttServiceProvider extends ServiceProvider
 {
-
     public function boot()
     {
-        $this->mergeConfigFrom(__DIR__.'/config/mqtt.php','mqtt');
+        $this->mergeConfigFrom(__DIR__ . '/config/mqtt.php', 'mqtt');
         $this->publishes([
-            __DIR__.'/config/mqtt.php' => config_path('mqtt.php'),
+            __DIR__ . '/config/mqtt.php' => config_path('mqtt.php'),
         ]);
     }
 
     public function register()
     {
-        $this->app->singleton('Mqtt',function (){
-
+        $this->app->singleton('Mqtt', function () {
             return new Mqtt();
         });
     }
@@ -35,6 +33,6 @@ class MqttServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return array('Mqtt');
+        return ['Mqtt'];
     }
 }

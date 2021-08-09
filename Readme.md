@@ -8,7 +8,7 @@ For Example see this [repo](https://github.com/salmanzafar949/Laravel-Mqtt-Examp
 
 ## Installation
 ```
-composer require salmanzafar/laravel-mqtt
+composer require Elemenx/laravel-mqtt
 ```
 ## Features
 
@@ -32,20 +32,22 @@ To declare the provider and/or alias explicitly, then add the service provider t
 ```
 'providers' => [
 
-        Salman\Mqtt\MqttServiceProvider::class,
+    Elemenx\Mqtt\MqttServiceProvider::class,
+
 ];
 ```
 And then add the alias to your config/app.php:
 ```
 'aliases' => [
 
-       'Mqtt' => \Salman\Mqtt\Facades\Mqtt::class,
+    'Mqtt' => \Elemenx\Mqtt\Facades\Mqtt::class,
+
 ];
 ```
 ## Configuration
 Publish the configuration file
 ```
-php artisan vendor:publish --provider="Salman\Mqtt\MqttServiceProvider"
+php artisan vendor:publish --provider="Elemenx\Mqtt\MqttServiceProvider"
 ```
 ## Config/mqtt.php
 ```
@@ -63,20 +65,20 @@ php artisan vendor:publish --provider="Salman\Mqtt\MqttServiceProvider"
 #### Publishing topic
 
 ```
-use Salman\Mqtt\MqttClass\Mqtt;
+use Elemenx\Mqtt\MqttClass\Mqtt;
 
-public function SendMsgViaMqtt($topic, $message)
+public function sendMsgViaMqtt($topic, $message)
 {
-        $mqtt = new Mqtt();
-        $client_id = Auth::user()->id;
-        $output = $mqtt->ConnectAndPublish($topic, $message, $client_id);
+    $mqtt = new Mqtt();
+    $client_id = Auth::user()->id;
+    $output = $mqtt->connectAndPublish($topic, $message, $client_id);
 
-        if ($output === true)
-        {
-            return "published";
-        }
-        
-        return "Failed";
+    if ($output === true)
+    {
+        return "published";
+    }
+    
+    return "Failed";
 }
 ```
 #### Publishing topic using Facade
@@ -84,74 +86,70 @@ public function SendMsgViaMqtt($topic, $message)
 ```
 use Mqtt;
 
-public function SendMsgViaMqtt($topic, $message)
+public function sendMsgViaMqtt($topic, $message)
 {
-        $client_id = Auth::user()->id;
-        
-        $output = Mqtt::ConnectAndPublish($topic, $message, $client_id);
+    $client_id = Auth::user()->id;
+    
+    $output = Mqtt::connectAndPublish($topic, $message, $client_id);
 
-        if ($output === true)
-        {
-            return "published";
-        }
+    if ($output === true)
+    {
+        return "published";
+    }
 
-        return "Failed";
+    return "Failed";
 }
 ```
 
 #### Subscribing topic
 
 ```
-use Salman\Mqtt\MqttClass\Mqtt;
+use Elemenx\Mqtt\MqttClass\Mqtt;
 
-public function SubscribetoTopic($topic)
-    {
-        $mqtt = new Mqtt();
-        $client_id = Auth::user()->id;
-        $mqtt->ConnectAndSubscribe($topic, function($topic, $msg){
-            echo "Msg Received: \n";
-            echo "Topic: {$topic}\n\n";
-            echo "\t$msg\n\n";
-        }, $client_id);
-
-
-    }
+public function subscribetoTopic($topic)
+{
+    $mqtt = new Mqtt();
+    $client_id = Auth::user()->id;
+    $mqtt->connectAndSubscribe($topic, function($topic, $msg){
+        echo "Msg Received: \n";
+        echo "Topic: {$topic}\n\n";
+        echo "\t$msg\n\n";
+    }, $client_id);
+}
 ```
 #### Subscribing topic using Facade
 
 ```
 use Mqtt;
 
-public function SubscribetoTopic($topic)
-    {
-       //You can also subscribe to multiple topics using the same function $topic can be array of topics e.g ['topic1', 'topic2']
+public function subscribetoTopic($topic)
+{
+    //You can also subscribe to multiple topics using the same function $topic can be array of topics e.g ['topic1', 'topic2']
 
-       Mqtt::ConnectAndSubscribe($topic, function($topic, $msg){
-            echo "Msg Received: \n";
-            echo "Topic: {$topic}\n\n";
-            echo "\t$msg\n\n";
-        },$client_id);
-
-
-    }
+    Mqtt::connectAndSubscribe($topic, function($topic, $msg){
+        echo "Msg Received: \n";
+        echo "Topic: {$topic}\n\n";
+        echo "\t$msg\n\n";
+    },$client_id);
+}
 ```
 
 #### Publishing topic using Helper method
 
 ```
 
-public function SendMsgViaMqtt($topic, $message)
+public function sendMsgViaMqtt($topic, $message)
 {
-        $client_id = Auth::user()->id;
-        
-        $output = connectToPublish($topic, $message, $client_id);
+    $client_id = Auth::user()->id;
+    
+    $output = connectToPublish($topic, $message, $client_id);
 
-        if ($output === true)
-        {
-            return "published";
-        }
+    if ($output === true)
+    {
+        return "published";
+    }
 
-        return "Failed";
+    return "Failed";
 }
 ```
 
@@ -159,9 +157,9 @@ public function SendMsgViaMqtt($topic, $message)
 
 ```
 //You can also subscribe to multiple topics using the same function $topic can be array of topics e.g ['topic1', 'topic2']
-public function SubscribetoTopic($topic)
+public function subscribetoTopic($topic)
 {
-  return connectToSubscribe($topic,$client_id);
+    return connectToSubscribe($topic, $client_id);
 }
 ```
 
