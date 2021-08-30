@@ -51,6 +51,12 @@
             "src/Helper/Helpers.php"
         ]
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/elemenx/MQTT-Laravel"
+        }
+    ],
     "extra": {
         "laravel": {
             "providers": [
