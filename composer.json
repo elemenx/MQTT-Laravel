@@ -43,7 +43,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Elemenx\\Mqtt\\": "src/"
+            "ElemenX\\Mqtt\\": "src/"
         },
         "files": [
             "src/Helper/Helpers.php"
@@ -52,10 +52,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Elemenx\\Mqtt\\MqttServiceProvider"
+                "ElemenX\\Mqtt\\MqttServiceProvider"
             ],
             "aliases": {
-                "Mqtt": "Elemenx\\Mqtt\\Facades\\Mqtt"
+                "Mqtt": "ElemenX\\Mqtt\\Facades\\Mqtt"
             }
         }
     }
